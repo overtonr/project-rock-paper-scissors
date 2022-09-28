@@ -19,33 +19,59 @@ console.log(randomNumber);
 var computerChoice = choices[randomNumber];
 alert('Computer chose: ' + computerChoice);
 
+var tieCount = 0;
+var winCount = 0;
+var losecount = 0;
 
-if (userChoice === computerChoice) {
-    alert('It is a tie');
-}
-if (userChoice === "R") {
-    if (computerChoice === "P") {
-        alert('Paper beats rock! Computer won.')
+function check(userChoice, computerChoice) {
+    if (userChoice === computerChoice) {
+        alert('It is a tie');
+        tieCount++;
+        return;
     }
-    if (computerChoice === "S") {
-        alert('Rock beats scissors! We won.')
-    } 
-}
-if (userChoice === "P") {
-    if (computerChoice === "R") {
-        alert('Paper beats rock! We won.')
+    if (userChoice === "R") {
+        if (computerChoice === "P") {
+            alert('Paper beats rock! Computer won.')
+            losecount++;
+            return;
+        }
+        if (computerChoice === "S") {
+            alert('Rock beats scissors! We won.')
+            winCount++;
+            return;
+        } 
     }
-    if (computerChoice === "S") {
-        alert('Scissors beats paper! Computer won.')
-    } 
-}
-if (userChoice === "S") {
-    if (computerChoice === "R") {
-        alert('Rock beats scissors! Computer won.')
+    if (userChoice === "P") {
+        if (computerChoice === "R") {
+            alert('Paper beats rock! We won.')
+            winCount++;
+            return
+        }
+        if (computerChoice === "S") {
+            alert('Scissors beats paper! Computer won.')
+            losecount++;
+            return;
+        } 
     }
-    if (computerChoice === "P") {
-        alert('Scissors beats paper! We won.')
-    } 
+    if (userChoice === "S") {
+        if (computerChoice === "R") {
+            alert('Rock beats scissors! Computer won.')
+            losecount++;
+            return;
+        }
+        if (computerChoice === "P") {
+            alert('Scissors beats paper! We won.')
+            winCount++;
+            return;
+        } 
+    }
+}
+
+
+
+check(userChoice, computerChoice);
+function showStats() {
+    alert("")
 }
 
 // after we presss ok we are alerted if we won or lost
