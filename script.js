@@ -1,28 +1,9 @@
-// prompt the user for r p or s
-var userChoice = prompt("Enter R, P, or S");
-userChoice = userChoice.toUpperCase();
-console.log(userChoice);
-var choices = ['R', 'P', 'S'];
-
-// if the userchoice is not inside choices, they would have to choose again
-while(!choices.includes(userChoice)) {
-    userChoice = prompt("Enter R, P, or S");
-    userChoice = userChoice.toUpperCase();
-}
-
-
-// player enters letter and presses ok
-// we are then alterted witht he computers random choice
-
-var randomNumber = Math.floor(Math.random() * 3);
-console.log(randomNumber);
-var computerChoice = choices[randomNumber];
-alert('Computer chose: ' + computerChoice);
-
+// win tie lose counts are global so they don't reset after each game
 var tieCount = 0;
 var winCount = 0;
 var losecount = 0;
 
+// A function to compare the userchoice to the computer choice and increments the tie, win, or lose count
 function check(userChoice, computerChoice) {
     if (userChoice === computerChoice) {
         alert('It is a tie');
@@ -39,7 +20,7 @@ function check(userChoice, computerChoice) {
             alert('Rock beats scissors! We won.')
             winCount++;
             return;
-        } 
+        }
     }
     if (userChoice === "P") {
         if (computerChoice === "R") {
@@ -51,7 +32,7 @@ function check(userChoice, computerChoice) {
             alert('Scissors beats paper! Computer won.')
             losecount++;
             return;
-        } 
+        }
     }
     if (userChoice === "S") {
         if (computerChoice === "R") {
@@ -63,18 +44,59 @@ function check(userChoice, computerChoice) {
             alert('Scissors beats paper! We won.')
             winCount++;
             return;
-        } 
+        }
     }
 }
 
-
-
-check(userChoice, computerChoice);
+// a function to show the stats on different lines as an alert
 function showStats() {
-    alert("")
+    alert("ties: " + tieCount + '\n' + "wins: " + winCount + '\n' + "loses: " + losecount);
 }
 
-// after we presss ok we are alerted if we won or lost
-// after we press ok again we are alerted with our stats
-// after we are them prompted if we want to play again
-// if we press ok then the game starts again, stats are stored for the next game
+
+// this function is the game loop for the rock paper scissors game
+// 1. get user input for r p or s
+// 2. computer randomly chooses r p or s
+// 3. compare user with computer
+// 4. increment win lose tie count
+// 5. confirm if the user wants to play again
+function playGame() {
+
+    // prompt the user to enter choice
+    // player enters letter and presses ok
+    var userChoice = prompt("Enter R, P, or S");
+    userChoice = userChoice.toUpperCase();
+    console.log(userChoice);
+    var choices = ['R', 'P', 'S'];
+
+    // if the userchoice is not inside choices, they would have to choose again until they enter r p or s
+    while (!choices.includes(userChoice)) {
+        userChoice = prompt("Enter R, P, or S");
+        userChoice = userChoice.toUpperCase();
+    }
+
+
+    // the computer will choose a random index of choices for R P or S
+    // generate random number 0-2.99 then round down to whole number
+    var randomNumber = Math.floor(Math.random() * 3); 
+    console.log(randomNumber);
+    var computerChoice = choices[randomNumber];
+
+    // we are then alerted with the computers random choice
+    alert('Computer chose: ' + computerChoice);
+
+    // Check and compare the computer choice with the user choice and increment win lose tie counts
+    check(userChoice, computerChoice);
+
+    // show the global stats when the game has ended then ask the user if they want to play again.
+    showStats();
+
+    // confirm if the user wants to play again
+    if(confirm('play again?')) {
+        playGame();
+    }
+
+}
+
+//starts the game of rock paper scissors
+playGame();
