@@ -20,6 +20,34 @@ var computerChoice = choices[randomNumber];
 alert('Computer chose: ' + computerChoice);
 
 
+if (userChoice === computerChoice) {
+    alert('It is a tie');
+}
+if (userChoice === "R") {
+    if (computerChoice === "P") {
+        alert('Paper beats rock! Computer won.')
+    }
+    if (computerChoice === "S") {
+        alert('Rock beats scissors! We won.')
+    } 
+}
+if (userChoice === "P") {
+    if (computerChoice === "R") {
+        alert('Paper beats rock! We won.')
+    }
+    if (computerChoice === "S") {
+        alert('Scissors beats paper! Computer won.')
+    } 
+}
+if (userChoice === "S") {
+    if (computerChoice === "R") {
+        alert('Rock beats scissors! Computer won.')
+    }
+    if (computerChoice === "P") {
+        alert('Scissors beats paper! We won.')
+    } 
+}
+
 // after we presss ok we are alerted if we won or lost
 // after we press ok again we are alerted with our stats
 // after we are them prompted if we want to play again
